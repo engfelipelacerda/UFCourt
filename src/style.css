@@ -7,3 +7,28 @@
 body {
   overflow: hidden;
 }
+
+canvas {
+  display: block;
+}
+
+#btnPlay {
+  position: absolute;
+
+  top: 20px;
+  left: 20px;
+
+  padding: 12px 24px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #202020;
+  color: white;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  z-index: 10;
+}
