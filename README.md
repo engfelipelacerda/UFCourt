@@ -2,6 +2,54 @@
 
 Interactive WebGL sports court simulation inspired by UFC indoor arenas, featuring dynamic lighting, real-time physics, and first-person exploration.
 
+# Tech Stack
+
+This project was developed using modern web graphics and real-time rendering technologies.
+
+## Core Technologies
+
+- JavaScript
+- WebGL
+- Node.js
+- npm
+
+## Libraries and Frameworks
+
+- Three.js — 3D rendering and scene management
+- Rapier — real-time physics simulation
+- lil-gui — graphical interface controls
+
+## Build Tool
+
+- Vite — frontend development environment and bundler
+
+---
+
+# Development Environment
+
+## Requirements
+
+- Node.js
+- npm
+
+## Installation
+
+```bash
+npm install
+```
+
+## Run Development Server
+
+```bash
+npm run dev
+```
+
+## Build Project
+
+```bash
+npm run build
+```
+
 # Project Structure
 
 ```text
