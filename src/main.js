@@ -26,7 +26,9 @@ let scene,
 
 // Tempos para movimentação
 let xdir = 0,
-  zdir = 0;
+  zdir = 0,
+  ydir = 0;
+
 let tiempoI, tiempoF, vel, delta;
 
 function init() {
@@ -54,6 +56,12 @@ function init() {
       case 83: // S
         zdir = -1;
         break;
+      case 32: // Espaço
+        ydir = 1;
+        break;
+      case 16: // Shift
+        ydir = -1;
+        break;
     }
   });
 
@@ -67,6 +75,10 @@ function init() {
       case 87:
       case 83:
         zdir = 0;
+        break;
+      case 32:
+      case 16:
+        ydir = 0;
         break;
     }
   });
@@ -107,10 +119,12 @@ function animate() {
   // Movimento do jogador
   if (pControl.isLocked === true) {
     let xDis = xdir * vel * delta;
+    let yDis = ydir * vel * delta;
     let zDis = zdir * vel * delta;
 
     pControl.moveRight(xDis);
     pControl.moveForward(zDis);
+    camera.position.y += yDis;
   }
 
   // Movimento do sol
