@@ -133,54 +133,33 @@ function createLine(width, height, x, z, color) {
    * =========================================
    */
 
-  function createArc(
-    radius,
-    startAngle,
-    endAngle,
-    x,
-    z,
-    color
-  ) {
+function createArc(
+  radius,
+  startAngle,
+  endAngle,
+  x,
+  z,
+  color,
+  lineWidth = 1// valor padrão
+) {
+  const curve = new THREE.ArcCurve(0, 0, radius, startAngle, endAngle, false);
+  const points = curve.getPoints(80);
 
-    const curve = new THREE.ArcCurve(
-      0,
-      0,
-      radius,
-      startAngle,
-      endAngle,
-      false
-    );
+  const geometry = new THREE.BufferGeometry().setFromPoints(
+    points.map((p) => new THREE.Vector3(p.x, 0.03, p.y))
+  );
 
-    const points = curve.getPoints(80);
+  const material = new THREE.LineBasicMaterial({
+    color,
+    linewidth: lineWidth, // controla espessura
+  });
 
-    const geometry =
-      new THREE.BufferGeometry().setFromPoints(
-        points.map(
-          (p) =>
-            new THREE.Vector3(
-              p.x,
-              0.03,
-              p.y
-            )
-        )
-      );
+  const arc = new THREE.Line(geometry, material);
+  arc.position.set(x, 0, z);
 
-    const material =
-      new THREE.LineBasicMaterial({
-        color,
-      });
-
-    const arc = new THREE.Line(
-      geometry,
-      material
-    );
-
-    arc.position.set(x, 0, z);
-
-    courtGroup.add(arc);
-
-    return arc;
-  }
+  courtGroup.add(arc);
+  return arc;
+}
 
   /*
    * =========================================
@@ -197,7 +176,7 @@ function createLine(width, height, x, z, color) {
     color
   ) {
 
-    const dashCount = 16;
+    const dashCount = 20;
 
     const totalAngle =
       endAngle - startAngle;
@@ -453,29 +432,32 @@ createBenchRectangle(7.5, 11.75);
     LINE_WHITE
   );
 
-  /*
-   * =========================================
-   * ÁREAS DOS GOLEIROS
-   * =========================================
-   */
+/*
+ * =========================================
+ * ÁREAS DOS GOLEIROS (linha mais grossa)
+ * =========================================
+ */
 
-  createArc(
-    6,
-    -Math.PI / 2,
-    Math.PI / 2,
-    -20,
-    0,
-    LINE_YELLOW
-  );
+createArc(
+  6,
+  -Math.PI / 2,
+  Math.PI / 2,
+  -20,
+  0,
+  LINE_YELLOW,
+  3 // espessura
+);
 
-  createArc(
-    6,
-    Math.PI / 2,
-    (Math.PI * 3) / 2,
-    20,
-    0,
-    LINE_YELLOW
-  );
+createArc(
+  6,
+  Math.PI / 2,
+  (Math.PI * 3) / 2,
+  20,
+  0,
+  LINE_YELLOW,
+  3 // espessura
+);
+
 
   /*
    * =========================================
