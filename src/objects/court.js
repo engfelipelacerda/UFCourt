@@ -13,7 +13,8 @@ export function createCourt() {
   const COURT_WIDTH = 40;
   const COURT_HEIGHT = 20;
 
-  const OUTSIDE_BORDER = 1.5;
+  const OUTSIDE_BORDER_X = 8;
+  const OUTSIDE_BORDER_Z = 6;
 
   /*
    * =========================================
@@ -23,67 +24,74 @@ export function createCourt() {
 
   const COURT_BLUE = 0x0d47c2;
   const COURT_BLUE_DARK = 0x082e7a;
+  const OUTSIDE_ORANGE = 0xff7a00;
 
   const LINE_WHITE = 0xffffff;
-  const UFC_YELLOW = 0xffc72c;
+  const LINE_YELLOW = 0xffc72c;
 
-/*
- * =========================================
- * BASE EXTERNA
- * =========================================
- */
+  /*
+   * =========================================
+   * ESPESSURA PADRÃO
+   * =========================================
+   */
 
-const outerGeometry = new THREE.PlaneGeometry(
-  COURT_WIDTH + OUTSIDE_BORDER,
-  COURT_HEIGHT + OUTSIDE_BORDER
-);
+  const thickness = 0.08;
 
-const outerMaterial = new THREE.MeshStandardMaterial({
-  color: COURT_BLUE_DARK,
-  roughness: 0.6,
-  metalness: 0.05,
-  side: THREE.DoubleSide,
-});
+  /*
+   * =========================================
+   * BASE EXTERNA
+   * =========================================
+   */
 
-const outerFloor = new THREE.Mesh(
-  outerGeometry,
-  outerMaterial
-);
+  const outerGeometry = new THREE.PlaneGeometry(
+    COURT_WIDTH + OUTSIDE_BORDER_X,
+    COURT_HEIGHT + OUTSIDE_BORDER_Z
+  );
 
-outerFloor.rotation.x = -Math.PI / 2;
+  const outerMaterial = new THREE.MeshStandardMaterial({
+    color: OUTSIDE_ORANGE,
+    roughness: 0.45,
+    metalness: 0.08,
+    side: THREE.DoubleSide,
+  });
 
-outerFloor.position.y = -0.01;
+  const outerFloor = new THREE.Mesh(
+    outerGeometry,
+    outerMaterial
+  );
 
-courtGroup.add(outerFloor);
+  outerFloor.rotation.x = -Math.PI / 2;
+  outerFloor.position.y = -0.01;
 
-/*
- * =========================================
- * PISO PRINCIPAL
- * =========================================
- */
+  courtGroup.add(outerFloor);
 
-const floorGeometry = new THREE.PlaneGeometry(
-  COURT_WIDTH,
-  COURT_HEIGHT
-);
+  /*
+   * =========================================
+   * PISO PRINCIPAL
+   * =========================================
+   */
 
-const floorMaterial = new THREE.MeshStandardMaterial({
-  color: COURT_BLUE,
-  roughness: 0.22,
-  metalness: 0.10,
-  side: THREE.DoubleSide,
-});
+  const floorGeometry = new THREE.PlaneGeometry(
+    COURT_WIDTH,
+    COURT_HEIGHT
+  );
 
-const floor = new THREE.Mesh(
-  floorGeometry,
-  floorMaterial
-);
+  const floorMaterial = new THREE.MeshStandardMaterial({
+    color: COURT_BLUE,
+    roughness: 0.22,
+    metalness: 0.10,
+    side: THREE.DoubleSide,
+  });
 
-floor.rotation.x = -Math.PI / 2;
+  const floor = new THREE.Mesh(
+    floorGeometry,
+    floorMaterial
+  );
 
-floor.receiveShadow = true;
+  floor.rotation.x = -Math.PI / 2;
+  floor.receiveShadow = true;
 
-courtGroup.add(floor);
+  courtGroup.add(floor);
 
   /*
    * =========================================
@@ -91,37 +99,33 @@ courtGroup.add(floor);
    * =========================================
    */
 
-  function createLine(
-    width,
-    height,
-    x,
-    z,
-    color
-  ) {
+function createLine(width, height, x, z, color) {
+  const geometry = new THREE.PlaneGeometry(width, height);
 
-    const geometry = new THREE.PlaneGeometry(
-      width,
-      height
-    );
+  const material = new THREE.MeshBasicMaterial({
+    color,
+    side: THREE.DoubleSide,
+  });
 
-    const material = new THREE.MeshBasicMaterial({
-      color,
-      side: THREE.DoubleSide,
-    });
+  const line = new THREE.Mesh(geometry, material);
 
-    const line = new THREE.Mesh(
-      geometry,
-      material
-    );
+  line.rotation.x = -Math.PI / 2;
 
-    line.rotation.x = -Math.PI / 2;
+  // ajuste para evitar gaps nos cantos
+  line.position.set(
+    Math.round(x * 1000) / 1000, 
+    0.02, 
+    Math.round(z * 1000) / 1000
+  );
 
-    line.position.set(x, 0.02, z);
+  // leve expansão para garantir sobreposição
+  line.scale.set(1.001, 1.001, 1);
 
-    courtGroup.add(line);
+  courtGroup.add(line);
 
-    return line;
-  }
+  return line;
+}
+
 
   /*
    * =========================================
@@ -301,14 +305,6 @@ courtGroup.add(floor);
 
   /*
    * =========================================
-   * ESPESSURA PADRÃO
-   * =========================================
-   */
-
-  const thickness = 0.12;
-
-  /*
-   * =========================================
    * BORDA EXTERNA
    * =========================================
    */
@@ -359,41 +355,65 @@ courtGroup.add(floor);
     LINE_WHITE
   );
 
- /*
- * =========================================
- * ÁREA DOS BANCOS (TRACEJADA)
- * =========================================
- */
+  /*
+   * =========================================
+   * ZONA DE SUBSTITUIÇÃO
+   * =========================================
+   */
 
-function createBenchMark(x, z) {
-
-  const segmentHeight = 0.22;
-  const gap = 0.18;
-
-  for (let i = 0; i < 4; i++) {
+  function createBenchMark(x, z) {
 
     createLine(
       thickness,
-      segmentHeight,
+      0.8,
       x,
-      z + (i * (segmentHeight + gap)),
+      z,
       LINE_WHITE
     );
   }
+
+  // superior
+  createBenchMark(-5, -10.4);
+  createBenchMark(5, -10.4);
+  createBenchMark(-10, -10.4);
+  createBenchMark(10, -10.4);
+
+  // inferior
+  createBenchMark(-5, 10.4);
+  createBenchMark(5, 10.4);
+  createBenchMark(-10, 10.4);
+  createBenchMark(10, 10.4);
+
+/*
+ * =========================================
+ * BANCOS DE RESERVAS (somente linhas)
+ * =========================================
+ */
+
+function createBenchRectangle(x, z) {
+  const width = 4.5;   // largura do retângulo
+  const height = 1.25; // altura do retângulo
+
+  // linha superior
+  createLine(width, thickness, x, z - height / 2, LINE_WHITE);
+
+  // linha inferior
+  createLine(width, thickness, x, z + height / 2, LINE_WHITE);
+
+  // linha esquerda
+  createLine(thickness, height, x - width / 2, z, LINE_WHITE);
+
+  // linha direita
+  createLine(thickness, height, x + width / 2, z, LINE_WHITE);
 }
 
-// superior esquerda
-createBenchMark(-8, -11.5);
+// banco superior (lado esquerdo e direito)
+createBenchRectangle(-7.5, -11.75);
+createBenchRectangle(7.5, -11.75);
 
-// superior direita
-createBenchMark(8, -11.5);
-
-// inferior esquerda
-createBenchMark(-8, 10.25);
-
-// inferior direita
-createBenchMark(8, 10.25);
-
+// banco inferior (lado esquerdo e direito)
+createBenchRectangle(-7.5, 11.75);
+createBenchRectangle(7.5, 11.75);
 
   /*
    * =========================================
@@ -445,7 +465,7 @@ createBenchMark(8, 10.25);
     Math.PI / 2,
     -20,
     0,
-    UFC_YELLOW
+    LINE_YELLOW
   );
 
   createArc(
@@ -454,7 +474,7 @@ createBenchMark(8, 10.25);
     (Math.PI * 3) / 2,
     20,
     0,
-    UFC_YELLOW
+    LINE_YELLOW
   );
 
   /*
@@ -505,7 +525,7 @@ createBenchMark(8, 10.25);
 
   /*
    * =========================================
-   * PÊNALTIS FUTSAL
+   * PÊNALTIS FUTSAL (6m)
    * =========================================
    */
 
@@ -513,7 +533,7 @@ createBenchMark(8, 10.25);
 
     const geometry =
       new THREE.CircleGeometry(
-        0.15,
+        0.12,
         32
       );
 
@@ -539,8 +559,17 @@ createBenchMark(8, 10.25);
   }
 
   createPenaltyMark(-14);
-
   createPenaltyMark(14);
+
+  /*
+   * =========================================
+   * MARCAS DOS 10m
+   * =========================================
+   */
+
+  createPenaltyMark(-10);
+
+  createPenaltyMark(10);
 
   /*
    * =========================================
@@ -549,6 +578,48 @@ createBenchMark(8, 10.25);
    */
 
   createPenaltyMark(0);
+
+  /*
+   * =========================================
+   * ESCANTEIOS
+   * =========================================
+   */
+
+  createArc(
+    0.25,
+    0,
+    Math.PI / 2,
+    -20,
+    -10,
+    LINE_WHITE
+  );
+
+  createArc(
+    0.25,
+    Math.PI / 2,
+    Math.PI,
+    20,
+    -10,
+    LINE_WHITE
+  );
+
+  createArc(
+    0.25,
+    -Math.PI / 2,
+    0,
+    -20,
+    10,
+    LINE_WHITE
+  );
+
+  createArc(
+    0.25,
+    Math.PI,
+    Math.PI * 1.5,
+    20,
+    10,
+    LINE_WHITE
+  );
 
   /*
    * =========================================
