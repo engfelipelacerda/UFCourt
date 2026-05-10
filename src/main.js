@@ -5,6 +5,7 @@ import { createCamera } from "./camera/setupCamera.js";
 import { createAmbientLight } from "./lights/ambientLight.js";
 import { createSunLight } from "./lights/sunLight.js";
 import { createFloor } from "./objects/floor.js";
+import { createCourt } from './objects/court';
 import { createCube } from "./objects/cubeTest.js"; // teste
 import { createPointerControls } from "./controls/createPointerControls.js";
 
@@ -29,6 +30,9 @@ function init() {
 
   const cube = createCube();
   scene.add(cube); // teste
+
+  const court = createCourt();
+  scene.add(court);
 
   scene.add(ambientLight);
   scene.add(sunLight);
