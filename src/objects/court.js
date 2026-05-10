@@ -383,16 +383,16 @@ function createBenchMark(x, z) {
 }
 
 // superior esquerda
-createBenchMark(-8, -10.5);
+createBenchMark(-8, -11.5);
 
 // superior direita
-createBenchMark(8, -10.5);
+createBenchMark(8, -11.5);
 
 // inferior esquerda
-createBenchMark(-8, 9.35);
+createBenchMark(-8, 10.25);
 
 // inferior direita
-createBenchMark(8, 9.35);
+createBenchMark(8, 10.25);
 
 
   /*
