@@ -1,17 +1,23 @@
 import * as THREE from "three";
 
 export function createFloor() {
-  const geometry = new THREE.PlaneGeometry(200, 200);
+  const geometry = new THREE.PlaneGeometry(48, 24);
+
+  const textureLoader = new THREE.TextureLoader();
+  const texture = textureLoader.load('../textures/Terrazzo005_1K-JPG_Color.jpg');
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(16, 16);
 
   const material = new THREE.MeshStandardMaterial({
-    color: 0x808080,
+    map:texture
   });
 
   const floor = new THREE.Mesh(geometry, material);
 
   // the plane lies on the XZ axis
   floor.rotation.x = -Math.PI / 2;
-
+  floor.position.y = 0.01;
   floor.receiveShadow = true;
 
   return floor;

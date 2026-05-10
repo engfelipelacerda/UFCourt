@@ -4,6 +4,7 @@ import { createRenderer } from "./renderer/setuprenderer.js";
 import { createCamera } from "./camera/setupCamera.js";
 import { createAmbientLight } from "./lights/ambientLight.js";
 import { createSunLight } from "./lights/sunLight.js";
+import { createGrass } from "./objects/grass.js";
 import { createFloor } from "./objects/floor.js";
 import { createCourt } from "./objects/court";
 import { createPointerControls } from "./controls/createPointerControls.js";
@@ -13,6 +14,7 @@ let scene,
   camera,
   ambientLight,
   sunLight,
+  grass,
   floor,
   pControl,
   court,
@@ -66,6 +68,9 @@ function init() {
 
   ambientLight = createAmbientLight();
   sunLight = createSunLight();
+
+  grass = createGrass();
+  scene.add(grass);
 
   floor = createFloor();
   scene.add(floor);
