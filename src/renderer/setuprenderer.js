@@ -19,6 +19,7 @@ export function createRenderer() {
 
   // Enables shadow rendering in the scene
   renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   return renderer;
 }

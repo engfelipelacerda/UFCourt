@@ -8,6 +8,7 @@ import { createCourt } from "./objects/court";
 import { createPointerControls } from "./controls/createPointerControls.js";
 import { createSunLight } from "./lights/sunLight.js";
 import { createSky, updateSky } from "./objects/sky.js";
+import { createSpotlight } from "./objects/spotLight.js";
 
 let scene,
   renderer,
@@ -22,7 +23,8 @@ let scene,
   sunLight,
   sunTime,
   gui,
-  effectController;
+  effectController,
+  spotLight;
 
 // Tempos para movimentação
 let xdir = 0,
@@ -31,7 +33,7 @@ let xdir = 0,
 
 let tiempoI, tiempoF, vel, delta;
 
-function init() {
+async function init() {
   scene = createScene();
   renderer = createRenderer();
   camera = createCamera();
@@ -102,6 +104,18 @@ function init() {
 
   court = createCourt();
   scene.add(court);
+
+  const post1 = await createSpotlight(23, -8.5, -15);
+  scene.add(post1);
+
+  const post2 = await createSpotlight(-32, -8.5, -15);
+  scene.add(post2);
+
+  const post3 = await createSpotlight(23, -8.5, 15);
+  scene.add(post3);
+
+  const post4 = await createSpotlight(-32, -8.5, 15);
+  scene.add(post4);
 
   tiempoI = Date.now();
   vel = 10;
