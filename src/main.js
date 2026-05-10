@@ -8,7 +8,7 @@ import { createFloor } from "./objects/floor.js";
 import { createCube } from "./objects/cubeTest.js"; // teste
 import { createPointerControls } from "./controls/createPointerControls.js";
 
-let scene, renderer, camera, ambientLight, sunLight, floor, pControl;
+let scene, renderer, camera, ambientLight, sunLight, floor, pControl, court;
 
 function init() {
   scene = createScene();
