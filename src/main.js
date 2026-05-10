@@ -81,7 +81,7 @@ function init() {
   sunLight = createSunLight();
   scene.add(sunLight);
 
-  sunTime = -Math.PI / 2 + 1.5;
+  sunTime = -Math.PI / 2 + 3;
 
   updateSky(sky, sun, sunLight, sunTime);
 
