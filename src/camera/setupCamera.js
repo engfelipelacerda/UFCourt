@@ -7,7 +7,7 @@ export function createCamera() {
     0.1,
     1000,
   );
-  camera.position.set(10, 10, 10);
+  camera.position.set(10, 1.7, 10);
 
   camera.lookAt(0, 0, 0);
   return camera;
