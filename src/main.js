@@ -9,7 +9,7 @@ import { createCourt } from './objects/court';
 import { createCube } from "./objects/cubeTest.js"; // teste
 import { createPointerControls } from "./controls/createPointerControls.js";
 
-let scene, renderer, camera, ambientLight, sunLight, floor, pControl;
+let scene, renderer, camera, ambientLight, sunLight, floor, pControl, court;
 
 function init() {
   scene = createScene();
