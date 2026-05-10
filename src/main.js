@@ -28,9 +28,6 @@ function init() {
 
   floor = createFloor();
 
-  const cube = createCube();
-  scene.add(cube); // teste
-
   const court = createCourt();
   scene.add(court);
 
