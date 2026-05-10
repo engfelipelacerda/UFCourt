@@ -22,12 +22,13 @@ export function createCourt() {
    * =========================================
    */
 
+  const LINE_FUTSAL = 0xffffff;
+  const LINE_VOLLEY = 0xffc72c;
+
   const COURT_BLUE = 0x0d47c2;
   const COURT_BLUE_DARK = 0x082e7a;
-  const OUTSIDE_ORANGE = 0xff7a00;
 
   const LINE_WHITE = 0xffffff;
-  const LINE_YELLOW = 0xffc72c;
 
   /*
    * =========================================
@@ -35,7 +36,8 @@ export function createCourt() {
    * =========================================
    */
 
-  const thickness = 0.08;
+  const thickness = 0.06;
+  const sportThickness = 0.075;
 
   /*
    * =========================================
@@ -49,9 +51,9 @@ export function createCourt() {
   );
 
   const outerMaterial = new THREE.MeshStandardMaterial({
-    color: OUTSIDE_ORANGE,
-    roughness: 0.45,
-    metalness: 0.08,
+    color: COURT_BLUE_DARK,
+    roughness: 0.72,
+    metalness: 0.02,
     side: THREE.DoubleSide,
   });
 
@@ -78,8 +80,8 @@ export function createCourt() {
 
   const floorMaterial = new THREE.MeshStandardMaterial({
     color: COURT_BLUE,
-    roughness: 0.22,
-    metalness: 0.10,
+    roughness: 0.35,
+    metalness: 0.02,
     side: THREE.DoubleSide,
   });
 
@@ -140,24 +142,36 @@ function createArc(
   x,
   z,
   color,
-  lineWidth = 1// valor padrão
+  lineWidth = 2
 ) {
-  const curve = new THREE.ArcCurve(0, 0, radius, startAngle, endAngle, false);
-  const points = curve.getPoints(80);
+  const curve = new THREE.ArcCurve(
+    0,
+    0,
+    radius,
+    startAngle,
+    endAngle,
+    false
+  );
+
+  const points = curve.getPoints(120);
 
   const geometry = new THREE.BufferGeometry().setFromPoints(
-    points.map((p) => new THREE.Vector3(p.x, 0.03, p.y))
+    points.map(
+      (p) => new THREE.Vector3(p.x, 0.03, p.y)
+    )
   );
 
   const material = new THREE.LineBasicMaterial({
     color,
-    linewidth: lineWidth, // controla espessura
+    linewidth: lineWidth,
   });
 
   const arc = new THREE.Line(geometry, material);
+
   arc.position.set(x, 0, z);
 
   courtGroup.add(arc);
+
   return arc;
 }
 
@@ -293,7 +307,7 @@ function createArc(
     thickness,
     0,
     -10,
-    LINE_WHITE
+    LINE_FUTSAL
   );
 
   createLine(
@@ -301,7 +315,7 @@ function createArc(
     thickness,
     0,
     10,
-    LINE_WHITE
+    LINE_FUTSAL
   );
 
   createLine(
@@ -309,7 +323,7 @@ function createArc(
     COURT_HEIGHT,
     -20,
     0,
-    LINE_WHITE
+    LINE_FUTSAL
   );
 
   createLine(
@@ -317,7 +331,7 @@ function createArc(
     COURT_HEIGHT,
     20,
     0,
-    LINE_WHITE
+    LINE_FUTSAL
   );
 
   /*
@@ -331,7 +345,7 @@ function createArc(
     COURT_HEIGHT,
     0,
     0,
-    LINE_WHITE
+    LINE_FUTSAL
   );
 
   /*
@@ -344,10 +358,10 @@ function createArc(
 
     createLine(
       thickness,
-      0.8,
+      0.75,
       x,
       z,
-      LINE_WHITE
+      LINE_FUTSAL
     );
   }
 
@@ -374,16 +388,16 @@ function createBenchRectangle(x, z) {
   const height = 1.25; // altura do retângulo
 
   // linha superior
-  createLine(width, thickness, x, z - height / 2, LINE_WHITE);
+  createLine(width, thickness, x, z - height / 2, LINE_VOLLEY);
 
   // linha inferior
-  createLine(width, thickness, x, z + height / 2, LINE_WHITE);
+  createLine(width, thickness, x, z + height / 2, LINE_VOLLEY);
 
   // linha esquerda
-  createLine(thickness, height, x - width / 2, z, LINE_WHITE);
+  createLine(thickness, height, x - width / 2, z, LINE_VOLLEY);
 
   // linha direita
-  createLine(thickness, height, x + width / 2, z, LINE_WHITE);
+  createLine(thickness, height, x + width / 2, z, LINE_VOLLEY);
 }
 
 // banco superior (lado esquerdo e direito)
@@ -429,7 +443,7 @@ createBenchRectangle(7.5, 11.75);
     Math.PI * 2,
     0,
     0,
-    LINE_WHITE
+    LINE_FUTSAL
   );
 
 /*
@@ -444,7 +458,7 @@ createArc(
   Math.PI / 2,
   -20,
   0,
-  LINE_YELLOW,
+  LINE_FUTSAL,
   3 // espessura
 );
 
@@ -454,10 +468,9 @@ createArc(
   (Math.PI * 3) / 2,
   20,
   0,
-  LINE_YELLOW,
+  LINE_FUTSAL,
   3 // espessura
 );
-
 
   /*
    * =========================================
@@ -471,7 +484,7 @@ createArc(
     Math.PI / 2,
     -20,
     0,
-    LINE_WHITE
+    LINE_FUTSAL
   );
 
   createDashedArc(
@@ -480,7 +493,7 @@ createArc(
     (Math.PI * 3) / 2,
     20,
     0,
-    LINE_WHITE
+    LINE_FUTSAL
   );
 
   /*
@@ -494,7 +507,7 @@ createArc(
     0.6,
     -12.5,
     0,
-    LINE_WHITE
+    LINE_FUTSAL
   );
 
   createLine(
@@ -502,7 +515,7 @@ createArc(
     0.6,
     12.5,
     0,
-    LINE_WHITE
+    LINE_FUTSAL
   );
 
   /*
@@ -512,7 +525,6 @@ createArc(
    */
 
   function createPenaltyMark(x) {
-
     const geometry =
       new THREE.CircleGeometry(
         0.12,
@@ -573,7 +585,7 @@ createArc(
     Math.PI / 2,
     -20,
     -10,
-    LINE_WHITE
+    LINE_FUTSAL
   );
 
   createArc(
@@ -582,7 +594,7 @@ createArc(
     Math.PI,
     20,
     -10,
-    LINE_WHITE
+    LINE_FUTSAL
   );
 
   createArc(
@@ -591,7 +603,7 @@ createArc(
     0,
     -20,
     10,
-    LINE_WHITE
+    LINE_FUTSAL
   );
 
   createArc(
@@ -600,8 +612,68 @@ createArc(
     Math.PI * 1.5,
     20,
     10,
-    LINE_WHITE
+    LINE_FUTSAL
   );
+
+  /*
+ * =========================================
+ * VÔLEI
+ * =========================================
+ */
+
+const VOLLEY_WIDTH = 18;
+const VOLLEY_HEIGHT = 9;
+
+// bordas laterais
+createLine(
+  VOLLEY_WIDTH,
+  sportThickness,
+  0,
+  -VOLLEY_HEIGHT / 2,
+  LINE_VOLLEY
+);
+
+createLine(
+  VOLLEY_WIDTH,
+  sportThickness,
+  0,
+  VOLLEY_HEIGHT / 2,
+  LINE_VOLLEY
+);
+
+// linhas de fundo
+createLine(
+  sportThickness,
+  VOLLEY_HEIGHT,
+  -VOLLEY_WIDTH / 2,
+  0,
+  LINE_VOLLEY
+);
+
+createLine(
+  sportThickness,
+  VOLLEY_HEIGHT,
+  VOLLEY_WIDTH / 2,
+  0,
+  LINE_VOLLEY
+);
+
+// linhas de ataque (3m)
+createLine(
+  sportThickness,
+  VOLLEY_HEIGHT,
+  -3,
+  0,
+  LINE_VOLLEY
+);
+
+createLine(
+  sportThickness,
+  VOLLEY_HEIGHT,
+  3,
+  0,
+  LINE_VOLLEY
+);
 
   /*
    * =========================================
