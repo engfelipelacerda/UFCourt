@@ -78,6 +78,7 @@ function init() {
   floor = createFloor();
   scene.add(floor);
 
+
   court = createCourt();
   scene.add(court);
 
