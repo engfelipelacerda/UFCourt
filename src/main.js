@@ -5,8 +5,7 @@ import { createCamera } from "./camera/setupCamera.js";
 import { createAmbientLight } from "./lights/ambientLight.js";
 import { createSunLight } from "./lights/sunLight.js";
 import { createFloor } from "./objects/floor.js";
-import { createCourt } from './objects/court';
-import { createCube } from "./objects/cubeTest.js"; // teste
+import { createCourt } from "./objects/court";
 import { createPointerControls } from "./controls/createPointerControls.js";
 
 let scene, renderer, camera, ambientLight, sunLight, floor, pControl, court;
@@ -27,17 +26,13 @@ function init() {
   sunLight = createSunLight();
 
   floor = createFloor();
-
-  const cube = createCube();
-  scene.add(cube); // teste
+  scene.add(floor);
 
   const court = createCourt();
   scene.add(court);
 
   scene.add(ambientLight);
   scene.add(sunLight);
-
-  scene.add(floor);
 
   animate();
 }
