@@ -3,21 +3,24 @@ import { createScene } from "./scene/setupScene.js";
 import { createRenderer } from "./renderer/setuprenderer.js";
 import { createCamera } from "./camera/setupCamera.js";
 import { createAmbientLight } from "./lights/ambientLight.js";
-import { createSunLight } from "./lights/sunLight.js";
 import { createFloor } from "./objects/floor.js";
 import { createCourt } from "./objects/court";
 import { createPointerControls } from "./controls/createPointerControls.js";
+import { createSun, updateSun } from "./lights/sunLight.js";
 
 let scene,
   renderer,
   camera,
   ambientLight,
-  sunLight,
   floor,
   pControl,
   court,
-  playButton;
+  playButton,
+  sunLight,
+  sunMesh,
+  sunTime;
 
+// Tempos para movimentação
 let xdir = 0,
   zdir = 0;
 let tiempoI, tiempoF, vel, delta;
@@ -65,7 +68,12 @@ function init() {
   });
 
   ambientLight = createAmbientLight();
-  sunLight = createSunLight();
+
+  // Criar sol
+  ({ sunLight, sunMesh } = createSun(scene));
+  sunTime = -Math.PI / 2 + 1;
+
+  updateSun(sunLight, sunMesh, sunTime);
 
   floor = createFloor();
   scene.add(floor);
@@ -75,7 +83,6 @@ function init() {
   scene.add(court);
 
   scene.add(ambientLight);
-  scene.add(sunLight);
 
   tiempoI = Date.now();
   vel = 10;
@@ -86,21 +93,28 @@ function init() {
 function animate() {
   requestAnimationFrame(animate);
 
+  tiempoF = Date.now();
+  delta = (tiempoF - tiempoI) / 1000;
+  tiempoI = tiempoF;
+
+  // Movimento do jogador
   if (pControl.isLocked === true) {
-    tiempoF = Date.now();
-
-    delta = (tiempoF - tiempoI) / 1000;
-
     let xDis = xdir * vel * delta;
     let zDis = zdir * vel * delta;
 
     pControl.moveRight(xDis);
     pControl.moveForward(zDis);
-
-    tiempoI = tiempoF;
   }
+
+  // Movimento do sol
+  sunTime += delta * 0.05;
+
+  if (sunTime > Math.PI * 2) {
+    sunTime = 0;
+  }
+
+  updateSun(sunLight, sunMesh, sunTime);
 
   renderer.render(scene, camera);
 }
-
 init();
