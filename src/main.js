@@ -6,7 +6,8 @@ import { createAmbientLight } from "./lights/ambientLight.js";
 import { createFloor } from "./objects/floor.js";
 import { createCourt } from "./objects/court";
 import { createPointerControls } from "./controls/createPointerControls.js";
-import { createSun, updateSun } from "./lights/sunLight.js";
+import { createSunLight } from "./lights/sunLight.js";
+import { createSky, updateSky } from "./objects/sky.js";
 
 let scene,
   renderer,
@@ -16,9 +17,12 @@ let scene,
   pControl,
   court,
   playButton,
+  sky,
+  sun,
   sunLight,
-  sunMesh,
-  sunTime;
+  sunTime,
+  gui,
+  effectController;
 
 // Tempos para movimentação
 let xdir = 0,
@@ -67,22 +71,25 @@ function init() {
     }
   });
 
+  // LUZ AMBIENTE
   ambientLight = createAmbientLight();
+  scene.add(ambientLight);
 
-  // Criar sol
-  ({ sunLight, sunMesh } = createSun(scene));
-  sunTime = -Math.PI / 2 + 1;
+  // SKY + GUI
+  ({ sky, sun, gui, effectController } = createSky(scene, renderer));
 
-  updateSun(sunLight, sunMesh, sunTime);
+  sunLight = createSunLight();
+  scene.add(sunLight);
+
+  sunTime = -Math.PI / 2 + 1.5;
+
+  updateSky(sky, sun, sunLight, sunTime);
 
   floor = createFloor();
   scene.add(floor);
 
-
   court = createCourt();
   scene.add(court);
-
-  scene.add(ambientLight);
 
   tiempoI = Date.now();
   vel = 10;
@@ -113,8 +120,7 @@ function animate() {
     sunTime = 0;
   }
 
-  updateSun(sunLight, sunMesh, sunTime);
-
+  updateSky(sky, sun, sunLight, sunTime);
   renderer.render(scene, camera);
 }
 init();
