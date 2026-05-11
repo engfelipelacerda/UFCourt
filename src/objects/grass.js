@@ -1,18 +1,20 @@
-import * as THREE from "three"
-import { color } from "three/tsl";
+import * as THREE from "three";
+import { textures } from "../assets/textures.js";
 
-export function createGrass(){
-    const geometry = new THREE.PlaneGeometry(200,200);
+export function createGrass() {
+  const geometry = new THREE.PlaneGeometry(200, 200);
 
-    const material = new THREE.MeshStandardMaterial({
-        color:0x008000
-    })
+  const material = new THREE.MeshStandardMaterial({
+    map: textures.gramtexture,
+    roughness: 1,
+    metalness: 0,
+  });
 
-    const grass = new THREE.Mesh(geometry,material);
+  const grass = new THREE.Mesh(geometry, material);
 
-    grass.rotation.x = -Math.PI / 2;
-    
-    grass.receiveShadow = true;
+  grass.rotation.x = -Math.PI / 2;
 
-    return grass;
+  grass.receiveShadow = true;
+
+  return grass;
 }
