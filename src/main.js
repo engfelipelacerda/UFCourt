@@ -114,43 +114,43 @@ async function init() {
   court = createCourt();
   scene.add(court);
 
-  const post1 = await createSpotlight(27, -6, -15);
+  const post1 = await createSpotlight(27, -4.25, -15.5);
   post1.rotation.y = Math.PI + Math.PI / 6;
   scene.add(post1);
 
-  const post2 = await createSpotlight(-27, -6, -15);
+  const post2 = await createSpotlight(-27, -4.25, -15.5);
   post2.rotation.y = -Math.PI / 6;
   scene.add(post2);
 
-  const post3 = await createSpotlight(27, -6, 15);
+  const post3 = await createSpotlight(27, -4.25, 15.5);
   post3.rotation.y = Math.PI - Math.PI / 6;
   scene.add(post3);
 
-  const post4 = await createSpotlight(-27, -6, 15);
+  const post4 = await createSpotlight(-27, -4.25, 15.5);
   post4.rotation.y = Math.PI / 6;
   scene.add(post4);
 
   const goal_l = await createSoccerGoal({
-    position:[-21,1,0],
-    rotation:[0,Math.PI/2,0]
+    position: [-21, 1, 0],
+    rotation: [0, Math.PI / 2, 0],
   });
   scene.add(goal_l);
 
   const goal_r = await createSoccerGoal({
-    position:[21,1,0],
-    rotation:[0,-Math.PI/2,0]
+    position: [21, 1, 0],
+    rotation: [0, -Math.PI / 2, 0],
   });
   scene.add(goal_r);
 
   const hoop_l = await createBasketHoop({
-    position:[22,0,0],
-    rotation:[0,-Math.PI/2,0]
+    position: [22, 0, 0],
+    rotation: [0, -Math.PI / 2, 0],
   });
   scene.add(hoop_l);
 
   const hoop_r = await createBasketHoop({
-    position:[-22,0,0],
-    rotation:[0,Math.PI/2,0]
+    position: [-22, 0, 0],
+    rotation: [0, Math.PI / 2, 0],
   });
   scene.add(hoop_r);
 

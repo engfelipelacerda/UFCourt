@@ -2,32 +2,27 @@ import { loadVolleyballNet } from "../assets/models";
 import * as THREE from "three";
 
 export async function createVolleyballNet(transform) {
-    const volleyNet = await loadVolleyballNet();
+  const volleyNet = await loadVolleyballNet();
 
-    volleyNet.scale.set(0.35,0.4,0.35);
-    
-    const [pos_x,pos_y,pos_z] = transform.position;
-    volleyNet.position.set(pos_x,pos_y,pos_z);
+  volleyNet.scale.set(0.35, 0.4, 0.35);
 
-    const [rot_x,rot_y,rot_z] = transform.rotation;
-    volleyNet.rotation.set(rot_x,rot_y,rot_z);
+  const [pos_x, pos_y, pos_z] = transform.position;
+  volleyNet.position.set(pos_x, pos_y, pos_z);
 
-    volleyNet.castShadow = true;
-    volleyNet.receiveShadow = true;
+  const [rot_x, rot_y, rot_z] = transform.rotation;
+  volleyNet.rotation.set(rot_x, rot_y, rot_z);
 
-    volleyNet.traverse((child) => {
-
+  volleyNet.traverse((child) => {
     if (child.isMesh) {
-
-        child.material.transparent = true;
-
-        child.material.alphaTest = 0.35;
-
-        child.material.side = THREE.DoubleSide;
-
-        child.material.needsUpdate = true;
+      child.material.transparent = true;
+      child.material.alphaTest = 0.35;
+      child.material.side = THREE.DoubleSide;
+      child.material.needsUpdate = true;
+      child.castShadow = true;
+      child.receiveShadow = true;
     }
-});
+  });
 
-    return volleyNet;
+  return volleyNet;
 }
+
