@@ -4,7 +4,7 @@ import * as THREE from "three";
 export async function createVolleyballNet(transform) {
     const volleyNet = await loadVolleyballNet();
 
-    volleyNet.scale.set(1,1,1);
+    volleyNet.scale.set(0.35,0.4,0.35);
     
     const [pos_x,pos_y,pos_z] = transform.position;
     volleyNet.position.set(pos_x,pos_y,pos_z);

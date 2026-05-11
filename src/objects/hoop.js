@@ -3,7 +3,7 @@ import { loadBasketHoop } from "../assets/models";
 export async function createBasketHoop(transform){
     const basketballHoop = await loadBasketHoop();
 
-    basketballHoop.scale.set(2.1,2.3,2.1);
+    basketballHoop.scale.set(0.9,0.93,0.9);
     
 
     const [pos_x,pos_y,pos_z] = transform.position;

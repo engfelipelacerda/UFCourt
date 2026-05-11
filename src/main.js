@@ -131,26 +131,26 @@ async function init() {
   scene.add(post4);
 
   const goal_l = await createSoccerGoal({
-    position: [-22, 1.95, 0],
-    rotation: [0, Math.PI / 2, 0],
+    position:[-21,1,0],
+    rotation:[0,Math.PI/2,0]
   });
   scene.add(goal_l);
 
   const goal_r = await createSoccerGoal({
-    position: [22, 1.95, 0],
-    rotation: [0, -Math.PI / 2, 0],
+    position:[21,1,0],
+    rotation:[0,-Math.PI/2,0]
   });
   scene.add(goal_r);
 
   const hoop_l = await createBasketHoop({
-    position: [24, 0, 0],
-    rotation: [0, -Math.PI / 2, 0],
+    position:[22,0,0],
+    rotation:[0,-Math.PI/2,0]
   });
   scene.add(hoop_l);
 
   const hoop_r = await createBasketHoop({
-    position: [-24, 0, 0],
-    rotation: [0, Math.PI / 2, 0],
+    position:[-22,0,0],
+    rotation:[0,Math.PI/2,0]
   });
   scene.add(hoop_r);
 
