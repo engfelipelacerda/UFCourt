@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { textures } from "../assets/textures.js";
 
 export function createFloor() {
-  const geometry = new THREE.PlaneGeometry(80, 64);
+  const geometry = new THREE.PlaneGeometry(55, 33);
 
   const material = new THREE.MeshStandardMaterial({
     map: textures.floortexture,

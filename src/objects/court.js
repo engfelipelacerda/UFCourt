@@ -51,7 +51,7 @@ export function createCourt() {
 
   const outerMaterial = new THREE.MeshStandardMaterial({
     color: COURT_BLUE_DARK,
-    roughness: 0.72,
+    roughness: 0.35,
     metalness: 0.02,
     side: THREE.DoubleSide,
   });
@@ -201,6 +201,8 @@ export function createCourt() {
     const material = new THREE.MeshStandardMaterial({
       color: COURT_BLUE_DARK,
       side: THREE.DoubleSide,
+      roughness: 0.35,
+      metalness: 0.02,
     });
 
     const area = new THREE.Mesh(geometry, material);
@@ -309,6 +311,8 @@ export function createCourt() {
 
   const centerBgMaterial = new THREE.MeshStandardMaterial({
     color: COURT_BLUE_DARK,
+    roughness: 0.35,
+    metalness: 0.02,
     side: THREE.DoubleSide,
   });
 
@@ -461,4 +465,3 @@ export function createCourt() {
 
   return courtGroup;
 }
-

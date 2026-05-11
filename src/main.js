@@ -13,6 +13,7 @@ import { createSpotlight } from "./objects/spotLight.js";
 import { createSoccerGoal } from "./objects/goal.js";
 import { createBasketHoop } from "./objects/hoop.js";
 import { createVolleyballNet } from "./objects/volleyNet.js";
+import { createSoccerBall } from "./objects/soccerBall.js";
 
 let scene,
   renderer,
@@ -129,20 +130,38 @@ async function init() {
   post4.rotation.y = Math.PI / 6;
   scene.add(post4);
 
-  const goal_l = await createSoccerGoal({position:[-22,1.95,0],rotation:[0,Math.PI/2,0]});
+  const goal_l = await createSoccerGoal({
+    position: [-22, 1.95, 0],
+    rotation: [0, Math.PI / 2, 0],
+  });
   scene.add(goal_l);
 
-  const goal_r = await createSoccerGoal({position:[22,1.95,0],rotation:[0,-Math.PI/2,0]});
+  const goal_r = await createSoccerGoal({
+    position: [22, 1.95, 0],
+    rotation: [0, -Math.PI / 2, 0],
+  });
   scene.add(goal_r);
 
-  const hoop_l = await createBasketHoop({position:[24,0,0],rotation:[0,-Math.PI/2,0]});
+  const hoop_l = await createBasketHoop({
+    position: [24, 0, 0],
+    rotation: [0, -Math.PI / 2, 0],
+  });
   scene.add(hoop_l);
 
-  const hoop_r = await createBasketHoop({position:[-24,0,0],rotation:[0,Math.PI/2,0]});
+  const hoop_r = await createBasketHoop({
+    position: [-24, 0, 0],
+    rotation: [0, Math.PI / 2, 0],
+  });
   scene.add(hoop_r);
 
-  const volleyNet = await createVolleyballNet({position:[0,0,0],rotation:[0,0,0]});
+  const volleyNet = await createVolleyballNet({
+    position: [0, 0, 0],
+    rotation: [0, 0, 0],
+  });
   scene.add(volleyNet);
+
+  const soccerball1 = await createSoccerBall(5, 0.185, 9);
+  scene.add(soccerball1);
 
   tiempoI = Date.now();
   vel = 10;
