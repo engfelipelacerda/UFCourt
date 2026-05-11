@@ -1,9 +1,10 @@
 import { loadSpotlightModel } from "../assets/models.js";
+import { createPostLight } from "../lights/postLight.js";
 
 export async function createSpotlight(x, y, z) {
   const spotlight = await loadSpotlightModel();
 
-  spotlight.scale.set(1, 1, 1);
+  spotlight.scale.set(0.7, 0.7, 0.7);
 
   spotlight.position.set(x, y, z);
 
@@ -12,13 +13,11 @@ export async function createSpotlight(x, y, z) {
       child.castShadow = true;
       child.receiveShadow = true;
     }
-    spotlight.traverse((child) => {
-      if (child.isMesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-      }
-    });
   });
+  const { light, target } = createPostLight();
+
+  spotlight.add(target);
+  spotlight.add(light);
 
   return spotlight;
 }

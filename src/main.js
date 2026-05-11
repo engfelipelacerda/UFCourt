@@ -105,16 +105,20 @@ async function init() {
   court = createCourt();
   scene.add(court);
 
-  const post1 = await createSpotlight(23, -8.5, -15);
+  const post1 = await createSpotlight(27, -6, -15);
+  post1.rotation.y = Math.PI + Math.PI / 6;
   scene.add(post1);
 
-  const post2 = await createSpotlight(-32, -8.5, -15);
+  const post2 = await createSpotlight(-27, -6, -15);
+  post2.rotation.y = -Math.PI / 6;
   scene.add(post2);
 
-  const post3 = await createSpotlight(23, -8.5, 15);
+  const post3 = await createSpotlight(27, -6, 15);
+  post3.rotation.y = Math.PI - Math.PI / 6;
   scene.add(post3);
 
-  const post4 = await createSpotlight(-32, -8.5, 15);
+  const post4 = await createSpotlight(-27, -6, 15);
+  post4.rotation.y = Math.PI / 6;
   scene.add(post4);
 
   tiempoI = Date.now();

@@ -61,7 +61,7 @@ export function createSky(scene, renderer) {
 // =========================================
 export function updateSky(sky, sun, sunLight, time, renderer) {
   const phi = Math.PI - time;
-  const theta = Math.PI / 2;
+  const theta = Math.PI / 3;
 
   sun.setFromSphericalCoords(1, phi, theta);
 
@@ -84,7 +84,7 @@ export function updateSky(sky, sun, sunLight, time, renderer) {
     sunLight.intensity = 0;
   }
 
-  // Exposure dinâmica opcional
+  // Exposure dinâmica
   if (renderer) {
     renderer.toneMappingExposure = sun.y > 0 ? 0.55 : 0.2;
   }
