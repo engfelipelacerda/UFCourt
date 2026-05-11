@@ -8,9 +8,11 @@ import { createGrass } from "./objects/grass.js";
 import { createFloor } from "./objects/floor.js";
 import { createCourt } from "./objects/court";
 import { createPointerControls } from "./controls/createPointerControls.js";
-import { createSunLight } from "./lights/sunLight.js";
 import { createSky, updateSky } from "./objects/sky.js";
 import { createSpotlight } from "./objects/spotLight.js";
+import { createSoccerGoal } from "./objects/goal.js";
+import { createBasketHoop } from "./objects/hoop.js";
+import { createVolleyballNet } from "./objects/volleyNet.js";
 
 let scene,
   renderer,
@@ -126,6 +128,21 @@ async function init() {
   const post4 = await createSpotlight(-27, -6, 15);
   post4.rotation.y = Math.PI / 6;
   scene.add(post4);
+
+  const goal_l = await createSoccerGoal({position:[-22,1.95,0],rotation:[0,Math.PI/2,0]});
+  scene.add(goal_l);
+
+  const goal_r = await createSoccerGoal({position:[22,1.95,0],rotation:[0,-Math.PI/2,0]});
+  scene.add(goal_r);
+
+  const hoop_l = await createBasketHoop({position:[24,0,0],rotation:[0,-Math.PI/2,0]});
+  scene.add(hoop_l);
+
+  const hoop_r = await createBasketHoop({position:[-24,0,0],rotation:[0,Math.PI/2,0]});
+  scene.add(hoop_r);
+
+  const volleyNet = await createVolleyballNet({position:[0,0,0],rotation:[0,0,0]});
+  scene.add(volleyNet);
 
   tiempoI = Date.now();
   vel = 10;

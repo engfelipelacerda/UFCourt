@@ -1,0 +1,19 @@
+import { loadSoccerGoal } from "../assets/models";
+
+export async function createSoccerGoal(transform){
+    const soccerGoal = await loadSoccerGoal();
+
+    soccerGoal.scale.set(2.1,2.3,2.1);
+    
+
+    const [pos_x,pos_y,pos_z] = transform.position;
+    soccerGoal.position.set(pos_x,pos_y,pos_z);
+
+    const [rot_x,rot_y,rot_z] = transform.rotation;
+    soccerGoal.rotation.set(rot_x,rot_y,rot_z);
+
+    soccerGoal.castShadow = true;
+    soccerGoal.receiveShadow = true;
+
+    return soccerGoal;
+}
