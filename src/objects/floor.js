@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { textures } from "../assets/textures.js";
 
 export function createFloor() {
   const geometry = new THREE.PlaneGeometry(48, 24);
@@ -10,7 +11,9 @@ export function createFloor() {
   texture.repeat.set(16, 16);
 
   const material = new THREE.MeshStandardMaterial({
-    map:texture
+    map: textures.floortexture,
+    roughness: 1,
+    metalness: 0,
   });
 
   const floor = new THREE.Mesh(geometry, material);
