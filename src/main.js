@@ -117,19 +117,19 @@ async function init() {
   court = createCourt();
   scene.add(court);
 
-  const post1 = await createSpotlight(27, -4.25, -15.5);
+  const post1 = await createSpotlight(26.7, -4.25, -14);
   post1.rotation.y = Math.PI + Math.PI / 6;
   scene.add(post1);
 
-  const post2 = await createSpotlight(-27, -4.25, -15.5);
+  const post2 = await createSpotlight(-26.7, -4.25, -14);
   post2.rotation.y = -Math.PI / 6;
   scene.add(post2);
 
-  const post3 = await createSpotlight(27, -4.25, 15.5);
+  const post3 = await createSpotlight(26.7, -4.25, 14);
   post3.rotation.y = Math.PI - Math.PI / 6;
   scene.add(post3);
 
-  const post4 = await createSpotlight(-27, -4.25, 15.5);
+  const post4 = await createSpotlight(-26.7, -4.25, 14);
   post4.rotation.y = Math.PI / 6;
   scene.add(post4);
 
@@ -166,27 +166,26 @@ async function init() {
   const soccerball1 = await createSoccerBall(5, 0.185, 9);
   scene.add(soccerball1);
 
-// --- ADIÇÃO DAS ARQUIBANCADAS GIGANTES E PRÓXIMAS ---
-  
+  // --- ADIÇÃO DAS ARQUIBANCADAS GIGANTES E PRÓXIMAS ---
+
   // Lado Esquerdo (Branca)
   const bleachersLeft = createBleachers(0xffffff);
   // O valor -22 deixa ela bem próxima da linha lateral
-  bleachersLeft.position.set(0, 0, -28); 
+  bleachersLeft.position.set(0, 0, -28);
   scene.add(bleachersLeft);
 
   // Lado Direito (Branca)
   const bleachersRight = createBleachers(0xffffff);
   // O valor 22 deixa ela próxima do outro lado
-  bleachersRight.position.set(0, 0, 28); 
+  bleachersRight.position.set(0, 0, 28);
   bleachersRight.rotation.y = Math.PI; // Vira de frente para a quadra
   scene.add(bleachersRight);
-  
+
   // --------------------------------------------------
 
   // Dentro do init():
-const track = createAthleticTrack();
-scene.add(track);
-
+  const track = createAthleticTrack();
+  scene.add(track);
 
   tiempoI = Date.now();
   vel = 10;
@@ -223,3 +222,4 @@ function animate() {
   renderer.render(scene, camera);
 }
 init();
+
