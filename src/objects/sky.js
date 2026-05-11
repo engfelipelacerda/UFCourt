@@ -1,11 +1,9 @@
 import * as THREE from "three";
 import { Sky } from "three/examples/jsm/objects/Sky.js";
-import GUI from "lil-gui";
+import { createSkyGUI } from "../gui/setupGUI.js";
 
-// =========================================
 // CREATE SKY
-// =========================================
-export function createSky(scene, renderer) {
+export function createSky(scene) {
   const sky = new Sky();
   sky.scale.setScalar(450000);
 
@@ -15,38 +13,18 @@ export function createSky(scene, renderer) {
 
   const uniforms = sky.material.uniforms;
 
-  // =========================================
   // CONTROLES GUI
-  // =========================================
   const effectController = {
-    turbidity: 0.5,
+    turbidity: 0.1,
     rayleigh: 0.411,
   };
 
-  // =========================================
   // UPDATE GUI
-  // =========================================
   function updateGUI() {
-    uniforms["turbidity"].value = effectController.turbidity;
-
-    uniforms["rayleigh"].value = effectController.rayleigh;
+    uniforms.turbidity.value = effectController.turbidity;
+    uniforms.rayleigh.value = effectController.rayleigh;
   }
-
-  // =========================================
-  // GUI
-  // =========================================
-  const gui = new GUI();
-
-  const folder = gui.addFolder("Controls");
-
-  folder.add(effectController, "turbidity", 0, 20, 0.1).onChange(updateGUI);
-
-  folder.add(effectController, "rayleigh", 0, 4, 0.001).onChange(updateGUI);
-
-  folder.open();
-
-  // Inicializa GUI
-  updateGUI();
+  const gui = createSkyGUI(effectController, updateGUI);
 
   return {
     sky,
@@ -59,7 +37,7 @@ export function createSky(scene, renderer) {
 // =========================================
 // MOVIMENTO AUTOMÁTICO DO SOL
 // =========================================
-export function updateSky(sky, sun, sunLight, time, renderer) {
+export function updateSky(sky, sun, sunLight, time) {
   const phi = Math.PI - time;
   const theta = Math.PI / 3;
 
@@ -82,10 +60,5 @@ export function updateSky(sky, sun, sunLight, time, renderer) {
     }
   } else {
     sunLight.intensity = 0;
-  }
-
-  // Exposure dinâmica
-  if (renderer) {
-    renderer.toneMappingExposure = sun.y > 0 ? 0.55 : 0.2;
   }
 }
