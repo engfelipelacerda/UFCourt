@@ -14,6 +14,9 @@ import { createSoccerGoal } from "./objects/goal.js";
 import { createBasketHoop } from "./objects/hoop.js";
 import { createVolleyballNet } from "./objects/volleyNet.js";
 import { createSoccerBall } from "./objects/soccerBall.js";
+// ADICIONADO:
+import { createBleachers } from "./objects/bleachers.js";
+import { createAthleticTrack } from "./objects/track.js";
 
 let scene,
   renderer,
@@ -162,6 +165,28 @@ async function init() {
 
   const soccerball1 = await createSoccerBall(5, 0.185, 9);
   scene.add(soccerball1);
+
+// --- ADIÇÃO DAS ARQUIBANCADAS GIGANTES E PRÓXIMAS ---
+  
+  // Lado Esquerdo (Branca)
+  const bleachersLeft = createBleachers(0xffffff);
+  // O valor -22 deixa ela bem próxima da linha lateral
+  bleachersLeft.position.set(0, 0, -28); 
+  scene.add(bleachersLeft);
+
+  // Lado Direito (Branca)
+  const bleachersRight = createBleachers(0xffffff);
+  // O valor 22 deixa ela próxima do outro lado
+  bleachersRight.position.set(0, 0, 28); 
+  bleachersRight.rotation.y = Math.PI; // Vira de frente para a quadra
+  scene.add(bleachersRight);
+  
+  // --------------------------------------------------
+
+  // Dentro do init():
+const track = createAthleticTrack();
+scene.add(track);
+
 
   tiempoI = Date.now();
   vel = 10;
