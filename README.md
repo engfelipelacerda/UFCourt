@@ -1,27 +1,48 @@
-# UFCourt
+# UFCCourt
 
-Interactive WebGL sports court simulation inspired by UFC indoor arenas, featuring dynamic lighting, real-time physics, and first-person exploration.
+A project developed using Three.js to create an interactive 3D experience for UFC court environment.
 
-# Tech Stack
+---
 
-This project was developed using modern web graphics and real-time rendering technologies.
+## 👥 Team Members
 
-## Core Technologies
+| Name                                    | Email                         |
+| --------------------------------------- | ----------------------------- |
+| Luis Felipe Pessoa Lacerda              | engluisfelipepessoa@gmail.com |
+| Francisco Lucas Xavier Mapurunga Vieira | lucas.vieira@alu.ufc.br       |
+| Pedro Rickson Fernandes Aragão          | pedrorickson95.fa@gmail.com   |
+| Ruan Pereira do Nascimento              | ruanpereira@alu.ufc.br        |
+
+---
+
+## 📌 About the Project
+
+UFCCourt is a 3D interactive environment developed with JavaScript and Three.js, rendered directly in the browser using WebGL.
+
+---
+
+## 🛠️ Technologies Used
 
 - JavaScript
-- WebGL
+- Three.js
 - Node.js
 - npm
+- Vite
+- lil-gui
+- WebGL
 
-## Libraries and Frameworks
+---
 
-- Three.js — 3D rendering and scene management
-- Rapier — real-time physics simulation
-- lil-gui — graphical interface controls
+## ✨ Features
 
-## Build Tool
-
-- Vite — frontend development environment and bundler
+- Interactive 3D environment
+- Real-time shadows
+- Camera movement controls
+- Dynamic lighting system
+- HDR environment maps
+- Physics and collision system
+- lil-gui integration for real-time scene adjustments
+- Turbidity and Rayleigh atmospheric controls using lil-gui
 
 ---
 
@@ -50,311 +71,153 @@ npm run dev
 npm run build
 ```
 
-# Project Structure
+---
 
-```text
-UFCourt/
-│
+## 📂 Project Structure
+
+```bash
+UFCCourt/
 ├── public/
-├── src/
-│   ├── main.js
-│   ├── style.css
-│   ├── scene/
-│   ├── lights/
-│   ├── physics/
-│   ├── objects/
-│   ├── loaders/
-│   ├── gui/
-│   ├── utils/
-│   └── assets/
+│   ├── hdr/
+│   ├── models/
+│   └── textures/
 │
+├── src/
+│   ├── assets/
+│   ├── camera/
+│   ├── controls/
+│   ├── gui/
+│   ├── lights/
+│   ├── loaders/
+│   ├── objects/
+│   ├── physics/
+│   ├── renderer/
+│   ├── scene/
+│   ├── utils/
+│   ├── main.js
+│   └── style.css
+│
+├── LICENSE
+├── README.md
 ├── index.html
-├── package.json
-├── vite.config.js
-├── .gitignore
-└── README.md
+├── package-lock.json
+└── package.json
+
+---
+
+### `public/`
+Contains static files served directly by the application.
+
+#### `public/hdr/`
+Stores HDR environment maps used for realistic scene lighting and reflections.
+
+#### `public/models/`
+Contains all 3D models used in the project.
+
+#### `public/textures/`
+Stores textures and material maps applied to 3D objects.
+
+---
+
+### `src/`
+Main source code directory of the application.
+
+#### `src/assets/`
+Contains general assets and reusable resources used throughout the project.
+
+#### `src/camera/`
+Responsible for camera creation, positioning, and configuration.
+
+#### `src/controls/`
+Handles user interaction and camera movement controls.
+
+#### `src/gui/`
+Contains GUI configuration and debugging interface controls.
+
+#### `src/lights/`
+Manages scene lighting setup and light configurations.
+
+#### `src/loaders/`
+Responsible for loading models, textures, HDR files, and other external assets.
+
+#### `src/objects/`
+Contains the creation and configuration of 3D scene objects.
+
+#### `src/physics/`
+Handles physics calculations, collisions, and related logic.
+
+#### `src/renderer/`
+Responsible for renderer creation and rendering configuration.
+
+#### `src/scene/`
+Manages scene initialization and scene-related setup.
+
+#### `src/utils/`
+Contains utility functions and reusable helper methods.
+
+#### `src/main.js`
+Main entry point of the application where all systems are initialized.
+
+#### `src/style.css`
+Global styles used throughout the application.
+
+---
+
+### `index.html`
+Main HTML file used to render the application.
+
+### `package.json`
+Contains project metadata, dependencies, and npm scripts.
+
+### `package-lock.json`
+Automatically generated file that locks dependency versions.
+
+### `README.md`
+Project documentation and setup instructions.
+
+### `LICENSE`
+Project license information.
+
+---
+
+## 🎮 Controls
+
+After entering the experience and clicking the **Play** button, you can use the following controls:
+
+| Key | Action |
+|---|---|
+| W | Move forward |
+| A | Move left |
+| S | Move backward |
+| D | Move right |
+| Space | Move up |
+| Shift | Move down |
+| Mouse | Look around |
+
+---
+
+### 🌤️ Environment Controls
+
+The project also includes a lil-gui panel that allows real-time atmospheric adjustments:
+
+| Control | Description |
+|---|---|
+| Turbidity | Controls the haze and density of the atmosphere |
+| Rayleigh | Controls atmospheric light scattering intensity |
 ```
 
 ---
 
-## Root Files
+## 📷 Project Preview
 
-### `index.html`
+### ☀️ Day Environment
 
-Main HTML entry point of the application.  
-Loads the WebGL canvas and initializes the main JavaScript module.
+![Day Scene](./public/screenshots/day-scene.png)
 
----
+### 🌅 Sunset Environment
 
-### `package.json`
+![Sunset Scene](./public/screenshots/sunset-scene.png)
 
-Contains project metadata, dependencies, and npm scripts.
+### 🌙 Night Environment
 
----
-
-### `vite.config.js`
-
-Configuration file for the Vite development environment and build system.
-
----
-
-### `.gitignore`
-
-Specifies files and folders ignored by Git.
-
----
-
-### `README.md`
-
-Project documentation, setup instructions, and architecture overview.
-
----
-
-# Source Folder (`src/`)
-
-Contains the main application source code.
-
----
-
-## `main.js`
-
-Main entry point of the application.
-
-Responsible for:
-
-- initializing the scene
-- creating the renderer and camera
-- loading lights and objects
-- starting the animation loop
-- updating physics and rendering frames
-
----
-
-## `style.css`
-
-Global styles for the application.
-
-Used to:
-
-- remove default browser margins
-- configure fullscreen rendering
-- style overlays and GUI components
-
----
-
-# Scene (`scene/`)
-
-Contains core scene configuration files.
-
----
-
-### `setupScene.js`
-
-Creates and configures the main Three.js scene.
-
-Handles:
-
-- scene initialization
-- background settings
-- fog and environment settings
-
----
-
-### `camera.js`
-
-Configures the main perspective camera used by the player.
-
----
-
-### `renderer.js`
-
-Creates and configures the WebGL renderer.
-
-Handles:
-
-- antialiasing
-- shadow mapping
-- tone mapping
-- resize events
-
----
-
-### `controls.js`
-
-Implements player movement and mouse controls using first-person camera interaction.
-
----
-
-# Lighting (`lights/`)
-
-Contains all scene lighting systems.
-
----
-
-### `ambientLight.js`
-
-Creates low-intensity ambient lighting for basic scene visibility.
-
----
-
-### `sunLight.js`
-
-Implements the dynamic sunlight system.
-
-Handles:
-
-- sun movement
-- day/night cycle
-- sunlight intensity updates
-
----
-
-### `spotlights.js`
-
-Creates and controls the indoor court spotlights.
-
-Allows:
-
-- enabling/disabling spotlights
-- configuring shadow casting
-
----
-
-# Physics (`physics/`)
-
-Contains Rapier physics engine integration and physical simulation logic.
-
----
-
-### `physicsWorld.js`
-
-Initializes and updates the physics simulation world.
-
----
-
-### `playerPhysics.js`
-
-Implements the player collider and collision interactions.
-
----
-
-### `ballPhysics.js`
-
-Creates physics-enabled balls with gravity and collision behavior.
-
-Handles:
-
-- rigid bodies
-- bouncing
-- object interactions
-
----
-
-# Objects (`objects/`)
-
-Contains visual scene objects and imported models.
-
----
-
-### `court.js`
-
-Loads and configures the sports court model.
-
----
-
-### `balls.js`
-
-Creates visual ball meshes synchronized with physics bodies.
-
----
-
-### `walls.js`
-
-Defines invisible collision walls used for physical boundaries.
-
----
-
-# Loaders (`loaders/`)
-
-Contains model and asset loading utilities.
-
----
-
-### `gltfLoader.js`
-
-Handles loading `.gltf` and `.glb` 3D models.
-
----
-
-# GUI (`gui/`)
-
-Contains graphical user interface controls.
-
----
-
-### `lightingGUI.js`
-
-Implements the interactive lighting control panel using lil-gui.
-
-Allows users to:
-
-- toggle spotlights
-- modify lighting parameters
-
----
-
-# Utilities (`utils/`)
-
-Contains helper functions and reusable utilities.
-
----
-
-### `constants.js`
-
-Stores reusable constants and configuration values.
-
----
-
-### `helpers.js`
-
-Contains general-purpose utility functions.
-
----
-
-### `time.js`
-
-Handles timing and animation-related calculations.
-
----
-
-# Assets (`assets/`)
-
-Stores external project resources.
-
----
-
-## `models/`
-
-Contains imported 3D models.
-
-Examples:
-
-- court models
-- ball models
-
----
-
-## `textures/`
-
-Contains texture maps used by scene materials.
-
-Examples:
-
-- wood floor textures
-- wall textures
-
----
-
-## `hdr/`
-
-Contains HDR environment maps used for advanced lighting and reflections.
+![Night Scene](./public/screenshots/night-scene.png)
