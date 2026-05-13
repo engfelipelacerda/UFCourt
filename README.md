@@ -1,4 +1,4 @@
-# UFCCourt
+# UFCourt
 
 A project developed using Three.js to create an interactive 3D experience for UFC court environment.
 
