@@ -229,8 +229,6 @@ The project also includes a lil-gui panel that allows real-time atmospheric adju
 | Turbidity | Controls the haze and density of the atmosphere |
 | Rayleigh  | Controls atmospheric light scattering intensity |
 
-```
-
 ---
 
 ## 📷 Project Preview
@@ -246,4 +244,7 @@ The project also includes a lil-gui panel that allows real-time atmospheric adju
 ### 🌙 Night Environment
 
 ![Night Scene](./public/screenshots/night-scene.png)
+
+```
+
 ```
