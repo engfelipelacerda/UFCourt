@@ -35,12 +35,10 @@ UFCCourt is a 3D interactive environment developed with JavaScript and Three.js,
 
 ## ✨ Features
 
-- Interactive 3D environment
 - Real-time shadows
 - Camera movement controls
 - Dynamic lighting system
 - HDR environment maps
-- Physics and collision system
 - lil-gui integration for real-time scene adjustments
 - Turbidity and Rayleigh atmospheric controls using lil-gui
 
